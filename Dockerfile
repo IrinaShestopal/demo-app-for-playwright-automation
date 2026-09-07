@@ -1,10 +1,10 @@
-FROM amazoncorretto:21 AS build
+FROM maven:3.9-amazoncorretto-21 AS build
 
 WORKDIR /app
 
 COPY . .
 
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 
 FROM amazoncorretto:21
