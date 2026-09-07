@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping("/api/hello")
     public String hello() {
-        return "Hello from Java backend!";
+        return "Here I am";
     }
 
 }
