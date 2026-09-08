@@ -56,3 +56,17 @@ jobs:
 
           echo "Deployment did not become LIVE within 10 minutes."
           exit 1
+
+      - name: Trigger Playwright E2E workflow
+        env:
+          PLAYWRIGHT_REPO_TOKEN: ${{ secrets.PLAYWRIGHT_REPO_TOKEN }}
+        run: |
+          curl --fail --silent --show-error \
+            --request POST \
+            --url "https://api.github.com/repos/IrinaShestopal/playwright-automation/actions/workflows/e2e.yml/dispatches" \
+            --header "Authorization: Bearer $PLAYWRIGHT_REPO_TOKEN" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --data '{"ref":"main"}'
+
+          echo "Playwright E2E workflow triggered successfully."
